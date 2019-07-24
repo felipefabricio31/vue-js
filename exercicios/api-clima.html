@@ -9,52 +9,76 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="../vue.js"></script>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
 
     <div class="text-center bg-primary text-white">
-        <h2>Consumindo uma API (Clima)</h1>
+        <h2>Consumindo uma API (Coindesk) </h1>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
+        <br>
+        <button @click="buscarDados()" class="btn btn-danger"> Buscar </button>
+        <br>
+        <br>
+
         <div id="app">
-            <p>temperatura atual em ºC <b>{{clima.temp}}</b></p>
-            <button @click="puxarClima()" class="btn btn-primary">Buscar Clima</button>
+            <h1>Preços do Bitcoin</h1>
+            <div class="card bg-primary text-white">
+                <div v-for="currency in info" class="currency">
+                    {{ currency.description }}:
+                    <span class="lighten">
+                        <b> <span v-html="currency.symbol"></span>{{ currency.rate_float | currencydecimal }}</b>
+                    </span>
+                </div>
+            </div>
+
+            <br>
+
+            <h1>Retorno da API</h1>
+            <div class="card">
+                {{info}}
+            </div>
         </div>
     </div>
 
     <script>
-        const vm = new Vue({
+        new Vue({
             el: '#app',
-            data: {
-                clima: {},
-            },
-            methods: {
-                puxarClima() {
-                    fetch("https://api.hgbrasil.com/weather",
-                        {
-
-                            header: {
-                                'Access-Control-Allow-Origin': '*',
-                                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, x-access-token',
-                                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                            }
-                        })
-                        .then(response => response.json())
-                        .then(json => {
-                            //this.clima = json;
-                            console.log(json);
-                        })
+            data() {
+                return {
+                    info: null
                 }
             },
-        });
+            buscarDados() {
+                mounted();
+            },
+            mounted() {
+                axios
+                    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+                    .then(response => {
+                        this.info = response.data.bpi
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true
+                    })
+                    .finally(() => this.loading = false)
+            },
+            filters: {
+                currencydecimal(value) {
+                    return value.toFixed(2)
+                }
+            },
+        })
     </script>
 
 </body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+<script src=" https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
