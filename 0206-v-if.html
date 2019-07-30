@@ -18,20 +18,25 @@
     </div>
     <div class="container-fluid">
         <div id="app">
-            <h2 v-if="logado === 1">Usuário logado 1</h2>
-            <h2 v-else-if="logado === 2">Usuário logado 2</h2>
-            <h2 v-else>Usuário deslogado</h2>
+            <template v-if="logado">
+                <h2>Usuário está logado.</h2>
+                <button @click="logado = false" class="btn btn-danger">Deslogar</button>
+            </template>
+            <template v-else>
+                <h2>Usuário está deslogado.</h2>
+                <button @click="logado = true" class="btn btn-primary">Logar</button>
+            </template>
         </div>
     </div>
+
     <script>
         const vm = new Vue({
             el: "#app",
             data: {
-                logado: 4
+                logado: true
             }
         })
     </script>
-
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
