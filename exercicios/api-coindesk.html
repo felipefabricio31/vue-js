@@ -24,6 +24,18 @@
         <br>
 
         <div id="app">
+            <h1>Preços do Bitcoin</h1>
+            <div class="card bg-primary text-white">
+                <div v-for="currency in info" class="currency">
+                    {{ currency.description }}:
+                    <span class="lighten">
+                        <b> <span v-html="currency.symbol"></span>{{ currency.rate_float | currencydecimal }}</b>
+                    </span>
+                </div>
+            </div>
+
+            <br>
+
             <h1>Retorno da API</h1>
             <div class="card">
                 {{info}}
@@ -44,9 +56,9 @@
             },
             mounted() {
                 axios
-                    .get('https://api.hgbrasil.com/weather')
+                    .get('https://api.coindesk.com/v1/bpi/currentprice.json')
                     .then(response => {
-                        this.info = response
+                        this.info = response.data.bpi
                     })
                     .catch(error => {
                         console.log(error)

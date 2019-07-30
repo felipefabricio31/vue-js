@@ -12,29 +12,24 @@
 </head>
 
 <body>
+
     <div class="text-center bg-primary text-white">
-        <h2>Hello Word Vue.js!</h1>
+        <h2>Testando confições V-if</h1>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div id="app">
-            <h2>{{nome}}</h2>
-            <h4>{{idade}}</h3>
-                <h4>{{faculdade.possui}}</h4>
-                <h4 class="text-primary">{{faculdade.curso}}</h4>
+            <h2 v-if="logado === 1">Usuário logado 1</h2>
+            <h2 v-else-if="logado === 2">Usuário logado 2</h2>
+            <h2 v-else>Usuário deslogado</h2>
         </div>
     </div>
     <script>
         const vm = new Vue({
-            el: '#app',
+            el: "#app",
             data: {
-                nome: "Felipe Souza",
-                idade: "22",
-                faculdade: {
-                    possui: "Sim",
-                    curso: "Sistemas de Informação"
-                }
+                logado: 4
             }
-        });
+        })
     </script>
 
 </body>
