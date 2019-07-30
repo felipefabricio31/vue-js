@@ -18,6 +18,8 @@
     </div>
     <div class="container-fluid">
         <div id="app">
+            <h1 class="text-danger">Modelo v-if 01</h1>
+            <br>
             <template v-if="logado">
                 <h2>Usuário está logado.</h2>
                 <button @click="logado = false" class="btn btn-danger">Deslogar</button>
@@ -26,6 +28,11 @@
                 <h2>Usuário está deslogado.</h2>
                 <button @click="logado = true" class="btn btn-primary">Logar</button>
             </template>
+            <hr>
+            <hr>
+
+            <h1 class="text-danger">Modelo v-if 02</h1>
+            <h2 v-show="logado">Usuário está deslogado.</h2>
         </div>
     </div>
 
