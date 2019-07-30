@@ -1,0 +1,62 @@
+{
+	"menus": [
+		{
+			"menuId": 1,
+			"Nome": "Administração",
+			"Descricao": "",
+			"ItemMenu": [
+				{
+					"item": "Google",
+					"tela": "https://www.google.com.br"
+				},
+				{
+					"item": "M2 Item 2",
+					"tela": ""
+				},
+				{
+					"item": "M2 Item 3",
+					"tela": ""
+				}
+			]
+		},
+		{
+			"menuId" : 2,
+			"Nome": "Cadastros",
+			"Descricao": "",
+			"ItemMenu": [
+				{
+					"item": "M2 Item 1",
+					"tela": ""
+				},
+				{
+					"item": "M2 Item 2",
+					"tela": ""
+				},
+				{
+					"item": "M2 Item 3",
+					"tela": ""
+				}
+			]
+		},
+		{
+			"menuId" : 3,
+			"Nome": "Gerencia",
+			"Descricao": "",
+			"ItemMenu": [
+				{
+					"item": "M3 Item 1",
+					"tela": ""
+				},
+				{
+					"item": "M3 Item 2",
+					"tela": ""
+				},
+				{
+					"item": "M3 Item 3",
+					"tela": ""
+				}
+			]
+		}
+
+	]
+}
