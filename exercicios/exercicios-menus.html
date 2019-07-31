@@ -8,9 +8,7 @@
     <title>Vue.js</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <script src="../vue.js"></script>
-
     <script src="../node_modules/axios/dist/axios.min.js"></script>
 </head>
 
@@ -20,8 +18,7 @@
     </div>
     <div class="container-fluid">
         <div id="app">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-danger">
                 <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -42,32 +39,16 @@
                     </ul>
                 </div>
             </nav>
-
-            <ul v-for="item in menu.data.menus">
-                <li>
-                    {{item.Nome}}
-                    <ul v-for="val in item.ItemMenu">
-                        <li>
-                            <p class="text-primary">{{val.item}}</p>
-                            <p class="text-primary">{{val.item}}</p>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <br>
-            <br>
-            <br>
-            <h1>Retorno da API</h1>
-            <div class=" card">
-                {{menu}}
-            </div>
-
         </div>
     </div>
+
     <script>
         const vm = new Vue({
-            el: ' #app', data() { return { menu: null } }, mounted() {
+            el: ' #app',
+            data: {
+                menu: null
+            }
+            , mounted() {
                 axios.get('./arquivos/mock-api-menu.json')
                     .then(response => {
                         console.log(response)
