@@ -8,20 +8,56 @@
     <title>Vue.js</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="./vue.js"></script>
+    <script src="../vue.js"></script>
 </head>
 
 <body>
 
     <div class="text-center bg-primary text-white">
-        <h2>Reatividade e virtual dom</h1>
+        <h2>Api para buscar cep - viacep utilizando INPUT</h2>
     </div>
     <div class="container-fluid">
         <div id="app">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Cep</label>
+                    <input type="text" class="form-control" v-model="cep" maxlength="8">
+                    {{cep}}
+                </div>
+            </div>
+
+            <ul>
+                <li v-for="(valor, chave) in endereco">
+                    {{chave}}: {{valor}}
+                </li>
+            </ul>
+
+            <br>
+            <b>Retorno da API</b>
+            <div><cite>"{{endereco}}"</cite></div>
         </div>
     </div>
+
     <script>
-    
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                cep: "",
+                endereco: {},
+            },
+            watch: {
+                cep(valor) {
+                    if (valor.length === 8) {
+                        fetch(`https://viacep.com.br/ws/${valor}/json/unicode/`)
+                            .then(r => r.json())
+                            .then(r => {
+                                this.endereco = r;
+                                console.log(r);
+                            })
+                    }
+                }
+            },
+        });
     </script>
 
 </body>
